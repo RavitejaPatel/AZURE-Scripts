@@ -7,10 +7,10 @@ $count=0
 $blob_count_deleted = 0
 
 # Storage account details
-$storage_account_name = "azurebcdrdisks" 
-$storage_account_key = "fC3JZ6e9yuF8LXi0xJ7wfpIrod2ljfkgNMJYsnBkFYLOR9K5qOZePd97n67rlsy3vbpuqAO93+EGuicEnv7UmA=="
-$container = "vhds"
-$rgname="Azure_BCDR"
+$storage_account_name = "STORAGE_ACC_NAME" 
+$storage_account_key = "ACCESS_KEY"
+$container = "CONTAINER_NAME"
+$rgname="RG_NAME"
 
 ## Creating Storage context for Source, destination and log storage accounts
 $context = New-AzStorageContext -StorageAccountName $storage_account_name -StorageAccountKey $storage_account_key
