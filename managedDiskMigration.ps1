@@ -1,22 +1,22 @@
 ﻿#Source storage account
-$rgName ="ARM_TEMP"
-$location ="East Asia"
-$storageAccountName ="armtempdiag"
-$diskName ="ubuntu1_OsDisk_1_977ed3cb577241ef9fb8fbef0c64978a"
+$rgName ="RG_NAME"
+$location ="RG_LOCATION"
+$storageAccountName ="STORAGE_ACC_NAME"
+$diskName ="DISK_NAME"
 
 #Target storage account
-$destrgName ="roger01"
-$destlocation ="West Europe"
-$deststorageAccountName ="roger109teja"
-$destdiskName ="destrogerdisk"
+$destrgName ="DESTINATION RG NAME"
+$destlocation ="RG LOCATION"
+$deststorageAccountName ="STORAGE ACC NAME"
+$destdiskName ="SELECT DEST DISK NAME YOU WANT TO SAVE DISK AS"
  
 #Assign access to the source disk
 $sas =Grant-AzDiskAccess -ResourceGroupName $rgName -DiskName $diskName -DurationInSecond 3600 -Access Read
 
 $saKey =Get-AzStorageAccountKey -ResourceGroupName $destrgName -Name $deststorageAccountName
 $storageContext =New-AzStorageContext –StorageAccountName $deststorageAccountName -StorageAccountKey $saKey[0].Value
-New-AzStorageContainer -Context $storageContext -Name vhds10261
+New-AzStorageContainer -Context $storageContext -Name "CONTAINER NAME"
 
-Start-AzStorageBlobCopy -AbsoluteUri $sas.AccessSAS -DestContainer vhds10261 -DestContext $storageContext -DestBlob $destdiskName
+Start-AzStorageBlobCopy -AbsoluteUri $sas.AccessSAS -DestContainer "CONTAINER NAME" -DestContext $storageContext -DestBlob $destdiskName
 
-Get-AzStorageBlobCopyState -Context $storageContext -Blob $destdiskName -Container vhds10261
+Get-AzStorageBlobCopyState -Context $storageContext -Blob $destdiskName -Container "CONTAINER NAME"
